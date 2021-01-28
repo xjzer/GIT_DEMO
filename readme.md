@@ -4,7 +4,7 @@
 
 使用工具 github+Ubuntu18.04+git
 
-#### 资料来源   test
+#### 资料来源
 
 - ```
   git 简明指南 https://www.runoob.com/manual/git-guide/
@@ -106,7 +106,7 @@
   	HEAD^  或 HEAD~1 上一个版本
   	HEAD^^ 或 HEAD~2 上上一个版本
   	...
-  @--soft		移动HEAD指向的分支(不是改变HEAD的指向)
+  @--soft		移动HEAD指向的分支(不是改变HEAD的指向)，并且把两次提交之间的所有变更集都放在stage(index)区域中。
   @--hard		暂存区与工作区都回退，并且删除之前所有的提交信息
   @--mixed	默认参数，暂存区回退，工作区不变
   
