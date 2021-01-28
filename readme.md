@@ -41,6 +41,8 @@
   Changes not staged for commit:
   #工作区内容与暂存区内容一致，即git add后
   Changes to be committed:
+  #未追踪文件
+  Untracked files:
   ```
 
 #### 实用技巧
@@ -49,13 +51,16 @@
 
   ```bash
   #彩色的 git 输出：
-  git config color.ui true
+  git config --global color.ui true
   #内建的图形化 git：
   gitk
   #显示历史记录时，每个提交的信息只显示一行：
   git config format.pretty oneline
   #交互式添加文件到暂存区：
   git add -i
+  #每隔1s执行git status
+  git config color.status always
+  watch --color -n 1 -d git status
   ```
 
 
@@ -120,8 +125,8 @@
   
   注意如果指定文件，则不会移动HEAD
   git reset [--soft | --mixed | --hard] [HEAD] <filename>
-  ```
-  
+```
+
 - 从仓库撤销
 
   ```bash
@@ -179,7 +184,6 @@
     git reset commitID
     ```
     
-  
   - 当你把一个文件stage到Index区域里后后悔了
   
     ```bash
@@ -283,6 +287,26 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
 - 注意事项
 
   **请勿在其他分支上恢复，不然就会将文件携带到其他分支**
+
+#### 标签
+
+- 命令
+
+  ```bash
+  #创建
+  git tag <tag name>
+  git tag -a <tag name> -m <tag message>
+  git tag -a <tag name> <commit SHA1 value>
+  例如：git tag -a v1.0.0 -m 'version 1.0'
+  #查看
+  git tag
+  #推送标签到远程仓库
+  git push origin <tag name>
+   # 删除本地标签
+  git tag -d <tag name>
+  # 删除远程仓库标签
+  git push origin --delete tag <tag name>
+  ```
 
 #### github
 
