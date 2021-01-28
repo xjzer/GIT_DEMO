@@ -323,6 +323,9 @@
 - 使用ssh免登录上传
 
   ```bash
+  #测试是否成功
+  ssh -T git@gitee.com
+  ssh -T git@github.com
   #起别名
   git remote add origin_ssh git@github.com:xjzer/GIT_DEMO.git
   #上传
