@@ -4,12 +4,12 @@
 
 使用工具 github+Ubuntu18.04+git
 
-#### 资料来源
+#### 资料来源   test
 
 - ```
   git 简明指南 https://www.runoob.com/manual/git-guide/
   
-  图解git及原理 http://marklodato.github.io/visual-git-guide/index-zh-cn.html#checkout
+  图解git及原理(便于理解) http://marklodato.github.io/visual-git-guide/index-zh-cn.html
   
   git使用教程 https://mubu.com/app/edit/home/1lxWcxIplm5#m
   
@@ -20,9 +20,11 @@
 
 - 三棵树
 
-  ```
-  工作区 暂存区 Git仓库
-  ```
+  第一个是你的 `工作目录`，它持有实际文件；
+
+  第二个是 `暂存区（Index）`，它像个缓存区域，临时保存你的改动；
+
+  最后是 `HEAD`，它指向你最后一次提交的结果。
 
 - Git管理的文件有三种状态
 
@@ -32,7 +34,6 @@
   已提交 committed
   ```
 
-  
 
 #### 实用技巧
 
@@ -57,6 +58,9 @@
 - 过程
 
   ```bash
+  #创建git仓库：创建新文件夹并进入，然后执行
+  git init
+  	在新建文件夹下会新建一个.git隐藏文件夹
   #配置提交人姓名
   git config --global user.name 姓名
   
@@ -73,9 +77,6 @@
 - 过程
 
   ```bash
-  #初始化git仓库：在新建文件夹下会新建一个.git隐藏文件夹
-  git init
-  
   #查看文件状态
   git status
   
@@ -86,7 +87,7 @@
   
   #向仓库中提交代码：每次只包含一个功能，或者一个功能中包含bug的修改，便于恢复更改
   git commit -m 提交信息
-  
+  	现在，你的改动已经提交到了 HEAD，但是还没到你的远端仓库。
   #查看提交记录
   git log
   ```
@@ -95,22 +96,51 @@
 
 #### 撤销/删除
 
-- 撤销
+- 撤销格式
+
+  ```
+  git reset [--soft | --mixed | --hard] [HEAD]
+  
+  @HEAD
+  	HEAD   或 HEAD~0 表示当前版本
+  	HEAD^  或 HEAD~1 上一个版本
+  	HEAD^^ 或 HEAD~2 上上一个版本
+  	...
+  @--soft		移动HEAD指向的分支(不是改变HEAD的指向)
+  @--hard		暂存区与工作区都回退，并且删除之前所有的提交信息
+  @--mixed	默认参数，暂存区回退，工作区不变
+  
+  1.移动当前分支的指向		  (--soft到此停止)
+  2.根据分支的指向更新暂存区	(--mixed到此停止)
+  3.更新工作区				 (--hard到此停止)
+  ```
+
+  
+
+- 从仓库撤销
+
+  ```bash
+  #回退到指定版本
+  git reset commitID
+  
+  #回退上上上一个版本
+  git reset HEAD~3
+  git reset HEAD^^^
+  
+  #回退指定文件的版本
+  git reset HEAD^ hello.c
+  	回退上一个版本的hello.c
+  
+  #将本地的状态回退到和远程的一样 
+  git reset --hard origin/master
+  ```
+  
+- 从暂存区撤销
 
   ```bash
   #暂存区覆盖工作区（暂存区不受影响）
   git checkout 文件名
   	适用：工作目录中的文件存在问题
-  
-  #将仓库中指定的更新记录恢复出来，并且覆盖暂存区和工作区，且在这条更新记录之后的提交也被清除
-  git reset --hard commitID
-  	适用：工作目录和仓库中的代码都存在问题，希望将更早的提交记录恢复，并且删除有问题的提交记录
-  
-  #仓库中记录覆盖到暂存区或工作区
-  git reset HEAD
-  	将暂存区和HEAD的提交保持一致，工作区不受影响
-  git reset --hard HEAD
-  	将工作区、暂存区和HEAD保持一致
   ```
   
 - 删除
@@ -125,7 +155,23 @@
   	适用：将不想提交的临时文件从暂存区删除
   ```
 
-  
+- 使用场景
+
+  - 两个文件(test1.c、test2.c)修改后，都提交到了缓存区，我们现在要取消其中一个(test2.c)的缓存
+
+    ```bash
+    git reset HEAD test2.c
+    或者
+    git rm --cached test2.c
+    ```
+
+  - 工作目录和仓库中的代码都存在问题，希望将更早的提交记录恢复，并且删除有问题的提交记录。
+
+    ```bash
+    git reset commitID
+    ```
+
+  - 待添加
 
 #### 分支
 
@@ -171,7 +217,7 @@
   	在哪个分支操作就是基于哪个分支创建副本
   	
   #切换分支
-  #注意切换分支前将当前分支的工作要提交到仓库，防止将当前未提交的文件携带到其他分支，如果不想提交还想切换，查看第4点
+  #注意切换分支前将当前分支的工作要提交到仓库，防止将当前未提交的文件携带到其他分支，如果不想提交还想切换，查看暂时保存更改
   git checkout 分支名称
   	在切换分支之前，当前分区工作目录的文件一定要提交到git仓库中，保持当前分支工作区完全干净。
   
@@ -187,6 +233,8 @@
   	先切换到其他分支，才能删除当前分支。
   	如果要删除的分支不想合并，用D强制删除
   ```
+  
+  除非你将分支推送到远端仓库，不然该分支就是不为他人所见的
 
 #### 暂时保存更改
 
