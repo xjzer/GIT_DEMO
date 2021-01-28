@@ -43,8 +43,6 @@
   Changes to be committed:
   ```
 
-  
-
 #### 实用技巧
 
 - 过程
@@ -59,8 +57,6 @@
   #交互式添加文件到暂存区：
   git add -i
   ```
-
-
 
 
 #### 准备工作
@@ -102,13 +98,11 @@
   git log
   ```
 
-
-
-#### 撤销/删除
+#### 撤销/删除（未完成）
 
 - 撤销格式
 
-  ```bash
+```bash
   git reset [--soft | --mixed | --hard] [HEAD]
   
   @HEAD
@@ -127,7 +121,7 @@
   注意如果指定文件，则不会移动HEAD
   git reset [--soft | --mixed | --hard] [HEAD] <filename>
   ```
-
+  
 - 从仓库撤销
 
   ```bash
@@ -155,9 +149,8 @@
   ```bash
   #暂存区覆盖工作区（暂存区不受影响）
   git checkout 文件名
-  	适用：工作目录中的文件存在问题
+  适用：工作目录中的文件存在问题
   ```
-  
 - 删除
 
   ```bash
@@ -185,9 +178,10 @@
     ```bash
     git reset commitID
     ```
-
+    
+  
   - 当你把一个文件stage到Index区域里后后悔了
-
+  
     ```bash
     只需要把Index区域里的这个文件恢复到最近一次commit的状态（也就是HEAD），那就相当于unstage了。
     
@@ -195,9 +189,10 @@
     git reset file.txt
     git reset --mixed HEAD file.txt
     ```
-
+  
+  
   - 把某个文件恢复到历史版本
-
+  
     ```bash
     git reset commitID file.txt
     ```
@@ -205,8 +200,6 @@
 ##### reset和checkout
 
 reset改变HEAD所指向的分支的指向，让分支指向另一个commit
-
-check改变HEAD的指向，让HEAD指向另一个分支
 
 #### 分支
 
