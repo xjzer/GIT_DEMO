@@ -2,7 +2,7 @@
 
 #### Git简单操作指南
 
-使用工具 github1+Ubuntu18.04+git
+使用工具 github+Ubuntu18.04+git
 
 #### 资料来源
 
