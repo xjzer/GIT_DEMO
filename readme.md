@@ -476,5 +476,11 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   github仓库页面 ==》ADD A README
   ```
 
-  
+
+#### git推荐配置
+
+```shell
+git config --global alias.br branch
+git config --global alias.st status
+```
 
