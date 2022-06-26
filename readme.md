@@ -484,3 +484,12 @@ git config --global alias.br branch
 git config --global alias.st status
 ```
 
+#### git branch相关
+
+```shell
+#本地分支追踪远程分支
+git branch (--set-upstream-to=<upstream> | -u <upstream>) [<branchname>]
+
+git push -u origin main = git push origin main + git branch -u origin/main main
+```
+
