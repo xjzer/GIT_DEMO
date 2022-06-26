@@ -467,3 +467,17 @@ git push -u origin main = git push origin main + git branch -u origin/main main
 git branch -v
 git branch -vv
 ```
+
+#### 常见场景
+
+##### 远程仓库分支已经删除，本地如何更新
+
+```shell
+#查看远程仓库分支状态
+git remote show origin
+#本地同步(删除origin/xxx)
+git remote prune origin
+#本地删除stale remote-tracking branches(删除xxx)
+
+```
+
