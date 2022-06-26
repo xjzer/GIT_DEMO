@@ -1,5 +1,3 @@
-
-
 #### Git简单操作指南
 
 使用工具 github+Ubuntu18.04+git
@@ -25,7 +23,6 @@
   第二个是 `暂存区（Index）`，它像个缓存区域，临时保存你的改动；
 
   最后是 `HEAD`，它指向你最后一次提交的结果。
-
 - Git管理的文件有三种状态
 
   ```
@@ -33,7 +30,6 @@
   已暂存 staged
   已提交 committed
   ```
-
 - 命令 git status
 
   ```bash
@@ -63,7 +59,6 @@
   watch --color -n 1 -d git status
   ```
 
-
 #### 准备工作
 
 - 过程
@@ -81,7 +76,6 @@
   #查看配置信息
   git config --list
   ```
-
 
 #### 基本操作
 
@@ -148,7 +142,6 @@
   #将本地当前分支的状态回退到和最新提交的版本一样 
   git reset --hard HEAD
   ```
-  
 - 从暂存区撤销
 
   ```bash
@@ -167,7 +160,6 @@
   git rm --cached 文件名
   	适用：将不想提交的临时文件从暂存区删除
   ```
-
 - 使用场景
 
   - 两个文件(test1.c、test2.c)修改后，都提交到了缓存区，我们现在要取消其中一个(test2.c)的缓存
@@ -177,15 +169,13 @@
     或者
     git rm --cached test2.c
     ```
-
   - 工作目录和仓库中的代码都存在问题，希望将更早的提交记录恢复，并且删除有问题的提交记录。
 
     ```bash
     git reset commitID
     ```
-    
   - 当你把一个文件stage到Index区域里后后悔了
-  
+
     ```bash
     只需要把Index区域里的这个文件恢复到最近一次commit的状态（也就是HEAD），那就相当于unstage了。
     
@@ -193,10 +183,8 @@
     git reset file.txt
     git reset --mixed HEAD file.txt
     ```
-  
-  
   - 把某个文件恢复到历史版本
-  
+
     ```bash
     git reset commitID file.txt
     ```
@@ -210,17 +198,14 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
 - 通俗理解
 
   复制了一份工作目录，但在git中实现的方法更加复杂
-
 - 使用场景
 
   一个分支上开发新功能，另一个分支上修复之前的bug，并且互不影响
-
 - 一般使用
 
   1. 主分支（master）
 
      保持稳定
-
   2. 开发分支（develop）
 
      基于master分支创建。
@@ -228,13 +213,11 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
      开发分支功能累积到一定程度以后再合并到主分支
 
      也要保持最大程度的稳定性
-
   3. 功能分支（feature）
 
      作为开发具体功能的分支，基于开发分支创建。
 
      功能分支完成后将功能分支中的代码合并到开发分支，这时功能分支就可以删除了。
-
 - 过程
 
   ```bash
@@ -243,11 +226,11 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
       git branch -a（查看本地和远程的所有分支）
       git branch -r（查看远程分支）
       结果*表示当前分支
-      
+  
   #创建分支
   git branch 分支名称
   	在哪个分支操作就是基于哪个分支创建副本
-  	
+  
   #切换分支
   #注意切换分支前将当前分支的工作要提交到仓库，防止将当前未提交的文件携带到其他分支，如果不想提交还想切换，查看暂时保存更改
   git checkout 分支名称
@@ -265,7 +248,7 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   	先切换到其他分支，才能删除当前分支。
   	如果要删除的分支不想合并，用D强制删除
   ```
-  
+
   除非你将分支推送到远端仓库，不然该分支就是不为他人所见的
 
 #### 暂时保存更改
@@ -273,7 +256,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
 - 使用场景
 
   分支临时切换：当前正在开发分支写新功能，但要去别的分支修改bug，而新功能未写完不想提交到仓库。
-
 - 过程
 
   ```bash
@@ -283,7 +265,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   #恢复改动
   git stash pop
   ```
-
 - 注意事项
 
   **请勿在其他分支上恢复，不然就会将文件携带到其他分支**
@@ -326,7 +307,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
    git push -u 远程仓库地址别名 分支名称
    	记住远程仓库别名和分支名称，下次提交只需要git push即可
    ```
-
 3. 程序员B将远程仓库克隆到本地进行开发
 
    ```bash
@@ -339,7 +319,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
    ```
    github项目界面-settings-寻找到邀请collaborators-输入其用户名即可
    ```
-
 4. 程序员A从远程仓库获取最新的版本
 
    ```bash
@@ -348,7 +327,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
    #获取所有分支
    git pull -all
    ```
-
 5. 注意事项
 
    - git clone 只在第一次加入开发时使用
@@ -370,10 +348,9 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
 
 #### 解决冲突之非团队协作
 
-- 使用场景 
+- 使用场景
 
   程序员A和B不属于同一开发团队，B提交代码后，由仓库管理者A审核通过后才能生效。
-
 - B如何提交
 
   ```bash
@@ -387,7 +364,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   #B向A发出修改请求
   	在B的github仓库界面 ==》Pull request ==》New pull request ==》 Create ==》写好主题与描述
   ```
-
 - A如何审核
 
   ```bash
@@ -401,7 +377,7 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
 
 #### ssh免登陆上传
 
-- 认证方式 
+- 认证方式
 
   公钥+私钥
 
@@ -410,7 +386,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   私钥相当于钥匙，放在本地
 
   上传时，ssh认证成功即可完成上传。
-
 - 私钥生成
 
   ```bash
@@ -422,7 +397,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   公钥名称：id_rsa.pub
   私钥名称：id_rsa
   ```
-
 - github设置
 
   ```bash
@@ -432,7 +406,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   #设置仓库
   	头像 ==》Your repositories ==》选择仓库 ==》 code ==》ssh ==》复制
   ```
-
 - 使用ssh免登录上传
 
   ```bash
@@ -450,7 +423,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
 - 使用场景
 
   将不需要被git管理的文件名字添加到此文件中，在执行git命令的时候，git就会忽略这些文件。
-
 - 过程
 
   ```bash
@@ -459,7 +431,7 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   
   #添加想要忽略的文件或文件夹
   	将文件或文件夹的名称写入，每行一个
-  	
+  
   #测试
   git add .
   	发现刚才被忽略的内容没有放到暂存区
@@ -476,7 +448,6 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
   github仓库页面 ==》ADD A README
   ```
 
-
 #### git推荐配置
 
 ```shell
@@ -491,5 +462,8 @@ git config --global alias.st status
 git branch (--set-upstream-to=<upstream> | -u <upstream>) [<branchname>]
 
 git push -u origin main = git push origin main + git branch -u origin/main main
-```
 
+#查看分支对应sha1以及对应upstream branch
+git branch -v
+git branch -vv
+```
