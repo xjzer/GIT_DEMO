@@ -292,7 +292,22 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
 #### github
 
 1. 注册、创建远程仓库（省略）
-2. 程序员A推送本地仓库到远程仓库
+
+2. 本地初始化
+
+   ```c++
+   echo "# PRIVATE_NOTE" >> README.md
+   git init
+   git add README.md
+   git commit -m "first commit"
+   git branch -M main
+   git remote add origin git@github.com:xjzer/PRIVATE_NOTE.git
+   git push -u origin main
+   ```
+
+   
+
+3. 程序员A推送本地仓库到远程仓库
 
    ```bash
    #将本地分支的更新，推送到远程仓库。
@@ -307,7 +322,8 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
    git push -u 远程仓库地址别名 分支名称
    	记住远程仓库别名和分支名称，下次提交只需要git push即可
    ```
-3. 程序员B将远程仓库克隆到本地进行开发
+
+4. 程序员B将远程仓库克隆到本地进行开发
 
    ```bash
    #不需要身份验证
@@ -319,7 +335,8 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
    ```
    github项目界面-settings-寻找到邀请collaborators-输入其用户名即可
    ```
-4. 程序员A从远程仓库获取最新的版本
+
+5. 程序员A从远程仓库获取最新的版本
 
    ```bash
    #获取指定分支
@@ -327,7 +344,8 @@ reset改变HEAD所指向的分支的指向，让分支指向另一个commit
    #获取所有分支
    git pull -all
    ```
-5. 注意事项
+
+6. 注意事项
 
    - git clone 只在第一次加入开发时使用
    - 如果本地版本低于远程仓库，不能直接向远程仓库推送，要把远程仓库先pull到本地，然后再推送
@@ -481,3 +499,6 @@ git remote prune origin
 
 ```
 
+#### 手册
+
+https://git-scm.com/docs
